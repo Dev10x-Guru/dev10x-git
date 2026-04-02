@@ -1,0 +1,35 @@
+#compdef gwa
+
+__worktree_short_names() {
+    git worktree list 2>/dev/null | tail -n +2 | awk '{print $1}' | awk -F/ '{print $NF}'
+}
+
+__gwa_next_name() {
+    local main project worktrees_dir max
+    main=$(git worktree list 2>/dev/null | head -1 | awk '{print $1}')
+    [ -z "$main" ] && return
+    project=$(basename "$main")
+    worktrees_dir="$(dirname "$main")/.worktrees"
+    max=$(ls "$worktrees_dir" 2>/dev/null \
+        | grep -oP "^${project}-\K\d+$" \
+        | sort -n | tail -1)
+    echo "${project}-$(( ${max:-0} + 1 ))"
+}
+
+_gwa() {
+    case "$CURRENT" in
+        2)
+            local -a names worktrees
+            names=( "$(__gwa_next_name)" )
+            worktrees=( ${(f)"$(__worktree_short_names)"} )
+            _describe 'worktree name' names worktrees
+            ;;
+        3)
+            local -a branches
+            branches=( ${(f)"$(git branch --format='%(refname:short)' 2>/dev/null)"} )
+            _describe 'branch' branches
+            ;;
+    esac
+}
+
+_gwa "$@"

@@ -1,0 +1,13 @@
+#compdef gw
+
+__worktree_short_names() {
+    git worktree list 2>/dev/null | tail -n +2 | awk '{print $1}' | awk -F/ '{print $NF}'
+}
+
+_gw() {
+    local -a worktrees
+    worktrees=( ${(f)"$(__worktree_short_names)"} )
+    _describe 'worktree' worktrees
+}
+
+_gw "$@"
