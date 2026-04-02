@@ -1,37 +1,31 @@
-# Fish Shell Installation
+# Fish Shell
 
-## Functions
+## Quick Install
 
-Copy `functions/git.fish` to Fish's auto-load config directory:
-
-```
-cp functions/git.fish ~/.config/fish/conf.d/git.fish
+```sh
+curl -LsSf https://brave-labs.github.io/dev10x-git/install.sh | sh -s fish
 ```
 
-Fish automatically sources all files in `~/.config/fish/conf.d/` on startup.
-No manual sourcing or shell restart needed — open a new terminal tab.
+## What Gets Installed
 
-## Completions
+| File | Destination | Source |
+|------|-------------|--------|
+| Functions + aliases | `~/.config/fish/conf.d/dev10x-git.fish` | [`git.fish`](https://github.com/Brave-Labs/dev10x-git/blob/main/src/fish/functions/git.fish) |
+| `gw` completion | `~/.config/fish/completions/gw.fish` | [`gw.fish`](https://github.com/Brave-Labs/dev10x-git/blob/main/src/fish/completions/gw.fish) |
+| `gwa` completion | `~/.config/fish/completions/gwa.fish` | [`gwa.fish`](https://github.com/Brave-Labs/dev10x-git/blob/main/src/fish/completions/gwa.fish) |
+| `gwr` completion | `~/.config/fish/completions/gwr.fish` | [`gwr.fish`](https://github.com/Brave-Labs/dev10x-git/blob/main/src/fish/completions/gwr.fish) |
 
-Copy completion files to Fish's completions directory:
-
-```
-cp completions/gw.fish  ~/.config/fish/completions/gw.fish
-cp completions/gwa.fish ~/.config/fish/completions/gwa.fish
-cp completions/gwr.fish ~/.config/fish/completions/gwr.fish
-```
-
-Fish auto-discovers completions from `~/.config/fish/completions/`.
-Completions are loaded lazily when you first type the command and press Tab.
+Fish auto-loads files from `conf.d/` and `completions/` — open a new
+terminal tab to activate. No manual sourcing needed.
 
 ## File Layout
 
 ```
 ~/.config/fish/
 ├── conf.d/
-│   └── git.fish          # all functions + aliases
+│   └── dev10x-git.fish    # all functions + aliases
 └── completions/
-    ├── gw.fish           # tab-complete worktree names for gw
-    ├── gwa.fish          # tab-complete names + branches for gwa
-    └── gwr.fish          # tab-complete worktree names for gwr
+    ├── gw.fish            # tab-complete worktree names for gw
+    ├── gwa.fish           # tab-complete names + branches for gwa
+    └── gwr.fish           # tab-complete worktree names for gwr
 ```

@@ -1,47 +1,28 @@
-# Bash Installation
+# Bash
 
-## Functions & Aliases
+## Quick Install
 
-Source `git-utilities.bash` from your `~/.bashrc`:
-
-```bash
-# Add to ~/.bashrc
-source /path/to/dev10x-git/src/bash/git-utilities.bash
+```sh
+curl -LsSf https://brave-labs.github.io/dev10x-git/install.sh | sh -s bash
 ```
 
-Or copy it to a dedicated location and source from there:
+## What Gets Installed
 
-```bash
-cp git-utilities.bash ~/.bash_git_aliases
-echo 'source ~/.bash_git_aliases' >> ~/.bashrc
-```
+| File | Destination | Source |
+|------|-------------|--------|
+| Functions + aliases | `~/.dev10x-git/git-utilities.bash` | [`git-utilities.bash`](https://github.com/Brave-Labs/dev10x-git/blob/main/src/bash/git-utilities.bash) |
+| Tab completions | `~/.dev10x-git/git-completions.bash` | [`git-completions.bash`](https://github.com/Brave-Labs/dev10x-git/blob/main/src/bash/git-completions.bash) |
 
-Run `source ~/.bashrc` or open a new terminal to activate.
-
-## Completions
-
-Source `git-completions.bash` from your `~/.bashrc` (after the functions):
-
-```bash
-# Add to ~/.bashrc (after sourcing git-utilities.bash)
-source /path/to/dev10x-git/src/bash/git-completions.bash
-```
-
-Or copy to the system completion directory if available:
-
-```bash
-cp git-completions.bash ~/.bash_completion.d/git-worktree-completions.bash
-```
-
-Bash loads files from `~/.bash_completion.d/` automatically if
-`bash-completion` is installed. Check with `type _init_completion`.
+The installer adds source lines to `~/.bashrc` automatically (idempotent —
+won't duplicate on re-run). Run `source ~/.bashrc` or open a new terminal
+to activate.
 
 ## File Layout
 
 ```
 ~/
-├── .bashrc                    # source both files here
-├── .bash_git_aliases          # git-utilities.bash (functions + aliases)
-└── .bash_completion.d/
-    └── git-worktree-completions.bash  # tab completions
+├── .bashrc                             # source lines added here
+└── .dev10x-git/
+    ├── git-utilities.bash              # functions + aliases
+    └── git-completions.bash            # tab completions
 ```
